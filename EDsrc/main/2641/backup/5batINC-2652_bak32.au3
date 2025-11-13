@@ -31,7 +31,6 @@
 ; $a2p arrayToParam $a2p only 1 array Param  and get('nam')  set('nam')
 ;indicator: 'n' is filename  ;; 'a' a2s string with array elements ;;else s string
 ; cmd file 2 arrayadd code lines
-;ToDo: only one input array, schemata:  arrayadd "name"  ; arrayadd "value" ; ; value=get("name") set("name", "value")  search in array step 2 ;;
 Global $shellexNotepad = 0
 
 Global $prj = 'tst29'
@@ -270,7 +269,7 @@ Func _CreateIncludeFromArray_ArrayAdd(ByRef $aSourceArray, $sTargetArrayName, $s
 	FileClose($hFile)
 EndFunc   ;==>_CreateIncludeFromArray_ArrayAdd
 Func _CreateIncludeFromArray_byIndex(ByRef $aSourceArray, $sTargetArrayName, $sOutputFilePath)
-	; old nu.;  ;new use _CreateIncludeFromArray_ArrayAdd;
+	; old nu.
 	Local $hFile = FileOpen($sOutputFilePath, $FO_OVERWRITE)
 	If $hFile = -1 Then
 		_ExitOnError("Error: Could not open file for writing: " & @CRLF & $sOutputFilePath)
@@ -297,36 +296,71 @@ Func _CreateIncludeFromArray_byIndex(ByRef $aSourceArray, $sTargetArrayName, $sO
 	Local $sdummy = '    ' & "    " & ' ""    "" '
 EndFunc   ;==>_CreateIncludeFromArray_byIndex
 Func scriptAppendIncFiles()
+	#cs  ; call from main()
+	;;//  @@ Debug(248) :
+	;;// $cmdCPY_scriptNameAppendIncFiles = copy D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\bat1-2033.inc + D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\bat2-2033.inc + D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\bat3-2033.inc + D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\bat4-2033.inc  D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\5batINC.au3_AppendIncFiles.au3
+	;;//                                                               D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\5batINC.au3_AppendIncFiles.au3
+	;;//
+	; run(  copy a + b + c + d + e   f  )
+	;;// old ;;// 	$cmdCPY_scriptNameAppendIncFiles = 'copy ' & $sInc1_Path & ' + ' & $sInc2_Path & ' + ' & $sInc3_Path & ' + ' & $sInc4_Path & '" + "' & $sInc5_Path & '  ' & $scriptNameAppendIncFiles
+
+
+
+	AI CHAT: Korrigierte AutoIt-String-Logik
+	Angenommen, deine Variablen sind korrekt definiert ($sInc1_Path, etc. und $scriptNameAppendIncFiles), sollte der AutoIt-String so aussehen:
+
+	AutoIt
+
+	; AI CHAT:  Korrigierte Syntax für das Zusammenfügen MEHRERER Dateien mit binärem Modus
+	#ce  ; call from main()
 
 	; nee mach einfach ein file GlobalsArrayINC.au3
 	Local $GlobalsArrayINC = @ScriptDir & '\GlobalsArrayINC.au3'
 	Local $s_addArray_inc_first = @CRLF & '  ' & @CRLF & '  #include-once ' & @CRLF & ' #include <FileConstants.au3> ' & @CRLF & ' #include <Array.au3> ' & @CRLF & ' #include <MsgBoxConstants.au3> ' & @CRLF & ' #include <File.au3> ' & @CRLF & ' ' & @CRLF & ' ' & @CRLF
 
+
+
+	Local $sIncList_AI = '"' & $GlobalsArrayINC & '" + "' & $sInc1_Path & '" + "' & $sInc2_Path & '" + "' & $sInc3_Path & '" + "' & $sInc4_Path & '" + "' & $sInc5_Path & '"'
+	Local $sCopyCommand_AI = 'copy /B ' & $sIncList_AI & ' "' & $scriptNameAppendIncFiles & '"'
+	#cs ; Stelle sicher, dass dieser korrigierte $sCopyCommand mit dem /B-Schalter über Run(@ComSpec & " /c " & $sCopyCommand) ausgeführt wird. Das sollte das lästige EOF-Zeichen am Ende deiner zusammengefügten Datei verhindern.
+		; Originaler Befehl, aber als Argument für CMD vorbereitet
+	#ce ; Stelle sicher, dass dieser korrigierte $sCopyCommand mit dem /B-Schalter über Run(@ComSpec & " /c " & $sCopyCommand) ausgeführt wird. Das sollte das lästige EOF-Zeichen am Ende deiner zusammengefügten Datei verhindern.
+	;old; Local $sCopyCommand = 'copy "' & $sInc1_Path & '" + "' & $sInc2_Path & '" + "' & $sInc3_Path & '" + "' & $sInc4_Path & '" + "' & $sInc5_Path &  '" "' & $scriptNameAppendIncFiles & '"'
+	;new with /b ;
 	Local $sCopyCommand
-	$sCopyCommand = '"' & $GlobalsArrayINC & '" + "' & $sInc1_Path & '" + "' & $sInc2_Path & '" + "' & $sInc3_Path & '" + "' & $sInc4_Path & '" + "' & $sInc5_Path  & '" + "' & $sInc6_Path  & '" + "' & $sInc7_Path & '" "' & $scriptNameAppendIncFiles & '"'
+	$sCopyCommand = 'copy /B "' & $GlobalsArrayINC & '" + "' & $sInc1_Path & '" + "' & $sInc2_Path & '" + "' & $sInc3_Path & '" + "' & $sInc4_Path & '" + "' & $sInc5_Path  & '" + "' & $sInc6_Path  & '" + "' & $sInc7_Path & '" "' & $scriptNameAppendIncFiles & '"'
 	; here 277 in Func scriptAppendIncFiles()
 	; run cmd.exe
-	Local $cmdToRun = @ComSpec & ' /c copy /B ' & $sCopyCommand
+	Local $cmdToRun = @ComSpec & ' /c ' & $sCopyCommand
 	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : $cmdToRun = ' & $cmdToRun & @CRLF) ;### Debug Console
 
 	; Führt CMD aus und gibt den PID des gestarteten Prozesses zurück (> 0 bei Erfolg)
 	Local $cmdddrun = Run($cmdToRun, "", @SW_HIDE) ; @SW_HIDE versteckt das CMD-Fenster
+	;
+	;****************************
+	;****************************
+	; make script-file-with-arrays-create-on-end-file-append-.inc-files ; add .inc files to end on script file
+	;
+	; ok; ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : @ScriptName = ' & @ScriptName & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
 
 	Local $5batINC_append_incs                 ;;= @ScriptFullPath &  $scriptNameAppendIncFiles
 	$5batINC_append_incs = $fromFolderAppendIncFiles & @ScriptName & '_AppendIncFiles.au3'
 	; ok: D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\2460-ok-5batINC\5batINC-2460.au3_AppendIncFiles.au3
 	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : $5batINC_append_incs = ********* ' & @CRLF & ' *********************************************************************************** ' & @CRLF & $5batINC_append_incs & @CRLF & '>Error code: ' & @error & @CRLF)      ;### Debug Console
 
+	; Local $thisscript = @ScriptFullPath & @ScriptName  ; haha is allet drinn in @ScriptFullPath; zu viel: $thisscript = D:\ws\gitGit\source\workspaces\gitgit_auto\EDsrc\main\2460-ok-5batINC\5batINC-2460.au35batINC-2460.au3
+	; zu viel nu. ; ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : $thisscript = ' & $thisscript & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
 
-	Local $cpyAppendStr = '"' & $scriptNameAppendIncFiles & '" + "' & @ScriptFullPath & '"  "' & $5batINC_append_incs & '" '
+	Local $cpyAppendStr = 'copy /B "' & $scriptNameAppendIncFiles & '" + "' & @ScriptFullPath & '"  "' & $5batINC_append_incs & '" '
 	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : $cpyAppendStr =' & $cpyAppendStr & '= ' & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
-	$cmdToRun = @ComSpec & ' /c copy /B ' & $cpyAppendStr
+	$cmdToRun = @ComSpec & ' /c ' & $cpyAppendStr
 	$cmdddrun = Run($cmdToRun, "", @SW_HIDE) ; @SW_HIDE versteckt das CMD-Fenster
 
 
 	;
 	;****************************
 	;****************************
+	;
 	; $flist only for debugg console
 	Local $flist = @CRLF & $sInc1_Path & @CRLF & $sInc2_Path & @CRLF & $sInc3_Path & @CRLF & $sInc4_Path & @CRLF & $sInc5_Path & @CRLF &$sInc6_Path & @CRLF &$sInc7_Path & @CRLF & @CRLF
 	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : make $scriptNameAppendIncFiles {err 0/1 OK}?= ' & $cmdddrun & ' =' & $scriptNameAppendIncFiles & @CRLF & $flist & @CRLF & '>Error code: ' & @error & @CRLF)    ;### Debug Console
@@ -337,6 +371,7 @@ Func scriptAppendIncFiles()
 		MsgBox(48, "WARNUNG", "CMD-Prozess konnte nicht gestartet werden.")
 	EndIf
 	ConsoleWrite("--- Append  of .inc files END ---  scriptAppendIncFiles():" & @ScriptLineNumber & @CRLF & @CRLF)
+
 
 EndFunc   ;==>scriptAppendIncFiles
 Func SETprj($prj, ByRef $a)  ;$a[1] = 'set "prj=' & $prj & '"'

@@ -31,7 +31,6 @@
 ; $a2p arrayToParam $a2p only 1 array Param  and get('nam')  set('nam')
 ;indicator: 'n' is filename  ;; 'a' a2s string with array elements ;;else s string
 ; cmd file 2 arrayadd code lines
-;ToDo: only one input array, schemata:  arrayadd "name"  ; arrayadd "value" ; ; value=get("name") set("name", "value")  search in array step 2 ;;
 Global $shellexNotepad = 0
 
 Global $prj = 'tst29'

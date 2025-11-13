@@ -31,7 +31,6 @@
 ; $a2p arrayToParam $a2p only 1 array Param  and get('nam')  set('nam')
 ;indicator: 'n' is filename  ;; 'a' a2s string with array elements ;;else s string
 ; cmd file 2 arrayadd code lines
-;ToDo: only one input array, schemata:  arrayadd "name"  ; arrayadd "value" ; ; value=get("name") set("name", "value")  search in array step 2 ;;
 Global $shellexNotepad = 0
 
 Global $prj = 'tst29'
@@ -270,7 +269,7 @@ Func _CreateIncludeFromArray_ArrayAdd(ByRef $aSourceArray, $sTargetArrayName, $s
 	FileClose($hFile)
 EndFunc   ;==>_CreateIncludeFromArray_ArrayAdd
 Func _CreateIncludeFromArray_byIndex(ByRef $aSourceArray, $sTargetArrayName, $sOutputFilePath)
-	; old nu.;  ;new use _CreateIncludeFromArray_ArrayAdd;
+	; old nu.
 	Local $hFile = FileOpen($sOutputFilePath, $FO_OVERWRITE)
 	If $hFile = -1 Then
 		_ExitOnError("Error: Could not open file for writing: " & @CRLF & $sOutputFilePath)
