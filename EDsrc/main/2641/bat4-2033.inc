@@ -2,11 +2,13 @@
 Global $aBat4_Lines
 $aBat4_Lines = '' 
 _ArrayAdd($aBat4_Lines, '@@ECHO OFF')
-_ArrayAdd($aBat4_Lines, 'set "prj=tst28"')
+_ArrayAdd($aBat4_Lines, 'set "prj=tst3"')
 _ArrayAdd($aBat4_Lines, ':: set prj MUST in LINE 2 :: ws edit src prj-name-dir ::')
 _ArrayAdd($aBat4_Lines, 'REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.')
 _ArrayAdd($aBat4_Lines, 'rem !!!DO NOT CHANGE!!! ***')
 _ArrayAdd($aBat4_Lines, 'rem 4 gitFETCH')
+_ArrayAdd($aBat4_Lines, 'set "cmdnam=gitFETCH"')
+_ArrayAdd($aBat4_Lines, 'set "cmdnum=4"')
 _ArrayAdd($aBat4_Lines, 'SETLOCAL')
 _ArrayAdd($aBat4_Lines, 'REM *** WICHTIG: Ueberschreibt den Workspace komplett mit der NEUESTEN WEB GITHUB-Version! ***')
 _ArrayAdd($aBat4_Lines, 'REM *** Es setzt voraus, dass REPO und REMOTE (origin) existieren. ***')

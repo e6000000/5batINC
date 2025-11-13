@@ -1,5 +1,5 @@
 @ECHO OFF
-set "prj=tst28"
+set "prj=tst29"
 :: set prj MUST in LINE 2 :: ws edit src prj-name-dir ::
 REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.
 rem !!!DO NOT CHANGE!!! ***

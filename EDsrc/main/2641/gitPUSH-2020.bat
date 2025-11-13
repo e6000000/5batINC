@@ -4,8 +4,9 @@ set "prj=tst3"
 REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.
 rem !!!DO NOT CHANGE!!! ***
 rem 0 gitPUSH
+set "cmdnam=gitPUSH"
+set "cmdnum=0"
 SETLOCAL
-@ECHO OFF
 rem set "prj=tst29"
 REM *** only push . must exist: REPO, BARE-REPO und REMOTE  ***
 rem --- Globale Konfiguration (ReadOnly) ---

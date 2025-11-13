@@ -2,7 +2,7 @@
 Global $aBat3_Lines
 $aBat3_Lines = '' 
 _ArrayAdd($aBat3_Lines, '@@ECHO OFF')
-_ArrayAdd($aBat3_Lines, 'set "prj=tst28"')
+_ArrayAdd($aBat3_Lines, 'set "prj=tst3"')
 _ArrayAdd($aBat3_Lines, ':: set prj MUST in LINE 2 :: ws edit src prj-name-dir ::')
 _ArrayAdd($aBat3_Lines, 'REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.')
 _ArrayAdd($aBat3_Lines, 'rem !!!DO NOT CHANGE!!! ***')

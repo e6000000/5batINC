@@ -4,6 +4,8 @@ set "prj=tst3"
 REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.
 rem !!!DO NOT CHANGE!!! ***
 rem 4 gitFETCH
+set "cmdnam=gitFETCH"
+set "cmdnum=4"
 SETLOCAL
 REM *** WICHTIG: Ueberschreibt den Workspace komplett mit der NEUESTEN WEB GITHUB-Version! ***
 REM *** Es setzt voraus, dass REPO und REMOTE (origin) existieren. ***

@@ -4,6 +4,8 @@ set "prj=tst3"
 REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.
 rem !!!DO NOT CHANGE!!! ***
 rem 5 create-bare-gitPUSH
+set "cmdnam=create-bare-gitPUSH"
+set "cmdnum=5"
 SETLOCAL
 rem --- Global Configuration (set once) ---
 set "REPO_DIR=D:\ws\gitGit\source\workspaces\%prj%"

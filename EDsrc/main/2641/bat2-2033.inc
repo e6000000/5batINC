@@ -2,11 +2,13 @@
 Global $aBat2_Lines
 $aBat2_Lines = '' 
 _ArrayAdd($aBat2_Lines, '@@ECHO OFF')
-_ArrayAdd($aBat2_Lines, 'set "prj=tst28"')
+_ArrayAdd($aBat2_Lines, 'set "prj=tst3"')
 _ArrayAdd($aBat2_Lines, ':: set prj MUST in LINE 2 :: ws edit src prj-name-dir ::')
 _ArrayAdd($aBat2_Lines, 'REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.')
 _ArrayAdd($aBat2_Lines, 'rem !!!DO NOT CHANGE!!! ***')
 _ArrayAdd($aBat2_Lines, 'rem 2 bare-gitPUSH')
+_ArrayAdd($aBat2_Lines, 'set "cmdnam=bare-gitPUSH"')
+_ArrayAdd($aBat2_Lines, 'set "cmdnum=2"')
 _ArrayAdd($aBat2_Lines, 'SETLOCAL')
 _ArrayAdd($aBat2_Lines, 'REM *** only push . must exist: REPO, BARE-REPO und REMOTE  ***')
 _ArrayAdd($aBat2_Lines, 'rem --- Globale Konfiguration (ReadOnly) ---')

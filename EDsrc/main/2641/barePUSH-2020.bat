@@ -4,6 +4,8 @@ set "prj=tst3"
 REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.
 rem !!!DO NOT CHANGE!!! ***
 rem 1 barePUSH
+set "cmdnam=barePUSH"
+set "cmdnum=1"
 SETLOCAL
 REM *** only push . must exist: REPO, BARE-REPO und REMOTE  ***
 rem --- Globale Konfiguration (ReadOnly) ---

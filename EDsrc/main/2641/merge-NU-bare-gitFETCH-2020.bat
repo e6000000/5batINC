@@ -4,6 +4,8 @@ set "prj=tst3"
 REM *** IMPORTANT: The first 3 lines (including "set prj=...") used by  external software it interacts with.
 REM *** LINE 2 !!!DO NOT CHANGE!!! ***
 rem 11 merge-NU-bare-gitFETCH
+set "cmdnam=merge-NU-bare-gitFETCH"
+set "cmdnum=11"
 SETLOCAL
 REM *** Es setzt voraus, dass REPO, BARE-REPO und REMOTE existieren. ***
 rem --- Globale Konfiguration (ReadOnly) ---
